@@ -1,9 +1,10 @@
-import datetime, os, math, argparse, pickle
+import datetime, os, math, argparse, pickle, glob
 from colorama import Fore, Style
 '''TO-DO
 1. find a better way to dump tf-idf values, too much data being used for now using list of dict
 2. try to find more efficient ways to compute and calculate TF-IDF values , loop reduction required.
-3. change this code to pick a path and create TF-IDF dump from content of all of those files, where every line behaves like a independent document.
+3. (DONE)change this code to pick a path and create TF-IDF dump from content of all of those files, where every line behaves like a independent document.
+4. iintroduce a progress rate or better yet progress bar to the output.
 '''
 
 TAG = Fore.BLUE+'TF-IDF-GENE/'+Style.RESET_ALL
@@ -39,12 +40,15 @@ def find_tf_idf(file_names=['test.txt']):
 
 if __name__=='__main__':
     ap = argparse.ArgumentParser()
-    ap.add_argument("-d", "--doc", required=True, help="path to document file")
+    ap.add_argument("-d", "--docs", required=True, help="path to folder containing document files")
     args = vars(ap.parse_args())
-    doc_paths = [args['doc']]
+
+    doc_paths = glob.glob(args['docs']+'*')    
+    print(TAG,'Fetched files: ',doc_paths) 
+    
     tf_idf = find_tf_idf(doc_paths)
     
     #dump the generated TF-IDF in a file for further usage.
-    out_path = doc_paths[0]+'.tfidfpkl'
+    out_path = 'loadout.tfidfpkl'
     pickle.dump(tf_idf, open(out_path,'wb'), protocol=pickle.HIGHEST_PROTOCOL)
     print(TAG,'TF-IDF generation process ended, pickle file  dumped @ ',out_path)
