@@ -6,13 +6,8 @@ import http.client
 import urllib3
 from colorama import Fore,Back,Style
 import sys
+import config as cf
 import re
-
-#Variables that contains the user credentials to access Twitter API 
-access_token = "3162770335-fGWPmFbz7U7HZjG1dwxqNTYQgjwO2O0D8eZTxgd"
-access_token_secret = "J1ZOEdzjfy8Sqa7DZsFXG8Vl0qgLRYNkDgCcxYYdNhY4t"
-consumer_key = "gM35j7d7NgfB0W6MpD4MZN67W"
-consumer_secret = "Jp5mU3ixZMrM2Jf7CFVeO00kkHVjGY5GOnwHlET5NQjxH0DjAh"
 
 TAG = Fore.BLUE+'Twitter-Scrapper/'+Style.RESET_ALL
 
@@ -37,8 +32,8 @@ class StdOutListener(StreamListener):
 def main(filter_list):
     #This handles Twitter authetification and the connection to Twitter Streaming API
     l = StdOutListener()
-    auth = OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_token, access_token_secret)
+    auth = OAuthHandler(cf.consumer_key, cf.consumer_secret)
+    auth.set_access_token(cf.access_token, cf.access_token_secret)
     stream = Stream(auth, l)
 
     streamer(stream,filter_list)

@@ -87,6 +87,12 @@ celerybeat-schedule
 venv/
 ENV/
 
+# data folders
+data_bank/
+
+#configuration file
+config.py
+
 # Spyder project settings
 .spyderproject
 .spyproject
