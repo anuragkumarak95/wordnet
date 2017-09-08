@@ -89,6 +89,7 @@ ENV/
 
 # data folders
 data_bank/
+loadouts/
 
 #configuration file
 config.py

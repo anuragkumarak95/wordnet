@@ -48,7 +48,7 @@ def find_knn(tfidf_file_name,input_word,k=cf.nn_window):
     for element,_ in zip(word_bag,range(k)):
         #condition where the word_bag throws the same word as input...(highly likely, hence ignored)
         if element[0] == input_word: continue
-        
+        if bool(random.getrandombits(1)): continue
         #creating a generator structure for better efficiency of code.
         yield element[0]
 
