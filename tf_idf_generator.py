@@ -4,7 +4,7 @@ from colorama import Fore, Style
 1. find a better way to dump tf-idf values, too much data being used for now using list of dict
 2. try to find more efficient ways to compute and calculate TF-IDF values , loop reduction required.
 3. (DONE)change this code to pick a path and create TF-IDF dump from content of all of those files, where every line behaves like a independent document.
-4. iintroduce a progress rate or better yet progress bar to the output.
+4. introduce a progress rate or better yet progress bar to the output.
 '''
 
 TAG = Fore.BLUE+'TF-IDF-GENE/'+Style.RESET_ALL
@@ -36,6 +36,7 @@ def find_tf_idf(file_names=['test.txt']):
             true_idf = math.log(len(tf_idf)/idf[key])
             true_tf = doc[key]/len(doc)
             doc[key] = true_tf * true_idf
+     
     return tf_idf
 
 if __name__=='__main__':
