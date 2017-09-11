@@ -26,7 +26,7 @@ def find_knn(tfidf_file_name,input_word,k=cf.nn_window):
     word : kth Nearnest Neighbor of the provided input_word for specified file.(generator yield)
     '''
     #load provided pickle file of list of dict about docs.
-    tf_idf = pickle.load(open(tfidf_file_name,'rb'))
+    _, tf_idf = pickle.load(open(tfidf_file_name,'rb'))
 
     #find docs that have imput_word and gather their content
     word_bag = {}
