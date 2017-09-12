@@ -4,12 +4,12 @@ from tweepy import Stream
 import json
 import http.client
 import urllib3
-from colorama import Fore,Back,Style
 import sys
 import config as cf
 import re
 
-TAG = Fore.BLUE+'Twitter-Scrapper/'+Style.RESET_ALL
+from bin.paint import paint
+TAG = paint('Twitter-Scrapper/','b')
 
 #This is a basic listener that just prints received tweets to stdout.
 class StdOutListener(StreamListener):

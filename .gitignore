@@ -94,6 +94,9 @@ loadouts/
 #configuration file
 config.py
 
+# TF-IDF loadout files
+*.tfidfpkl
+
 # Spyder project settings
 .spyderproject
 .spyproject
