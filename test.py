@@ -25,9 +25,9 @@ def test(n,word):
     for w in find_knn(tf_idf,word,rand_on=False):
         out.append(w)
     print(TAG,out)
-    if sorted(out) != sorted(out_dict['OUT_TRUE_'+str(n)]): return 0
+    if sorted(out) != sorted(out_dict['OUT_TRUE_'+str(n)]): return 1
     
-    return 1
+    return 0
 
 if __name__=="__main__":
     test(1,'hello')
