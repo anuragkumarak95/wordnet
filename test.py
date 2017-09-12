@@ -17,19 +17,25 @@ out_dict = {
 ,'OUT_TRUE_4' : ['punjab', 'Whther', 'evergreen', 'haryana', 'victam', 'Sikhs', 'delhi', 'rocks', 'godmen']
 ,'OUT_TRUE_5' : ['neggie', 'lanny', 'quicky', 'jetpackers', 'shepherd', 'kline', 'schoolgirl', 'barbie', 'entirely', 'crussades']
 }
+
+tf_idf = []
+def __init__():
+    # generating tf-idf from test/testdata file(default tf-idf file)
+    _, tfidf = find_tf_idf()
+    global tf_idf
+    tf_idf = tfidf
+
 def test(n,word):
-    print(TAG,'Test #',n, 'word == ',word)
-    _ ,tf_idf = find_tf_idf(file_names=['test/testdata'],prev_file_path=None)
-    
+    # print(TAG,'Test #',n, 'word == ',word)
     out = []
     for w in find_knn(tf_idf,word,rand_on=False):
         out.append(w)
-    print(TAG,out)
+    # print(TAG,out)
     if sorted(out) != sorted(out_dict['OUT_TRUE_'+str(n)]): return 1
-    
     return 0
 
 if __name__=="__main__":
+    __init__()
     test(1,'hello')
     test(2,'stock')
     test(3,'punjab')

@@ -11,7 +11,7 @@ from bin.paint import paint #custom module for coloring different strings.
 '''
 
 TAG = paint('TF-IDF-GENE/','b')
-def find_tf_idf(file_names=['test.txt'],prev_file_path=None):
+def find_tf_idf(file_names=['test/testdata'],prev_file_path=None):
     tf_idf = [] # will hold a dict of word_count for every doc(line in a doc in this case)
     idf = {}
 
@@ -66,6 +66,6 @@ if __name__=='__main__':
     idf,tf_idf = find_tf_idf(doc_paths,args['file'])
     
     #dump the generated TF-IDF in a file for further usage.
-    out_path = 'loadout.tfidfpkl'
+    out_path = 'loadouts/loadout.tfidfpkl'
     pickle.dump((idf,tf_idf), open(out_path,'wb'), protocol=pickle.HIGHEST_PROTOCOL)
     print(TAG,'TF-IDF generation process ended, pickle file  dumped @ ',out_path)
