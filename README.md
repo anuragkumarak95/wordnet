@@ -1,4 +1,4 @@
-# WordNet
+# WordNet ![buid-status](https://travis-ci.org/anuragkumarak95/wordnet.svg?branch=master)
 Create a Simple network of words related to each other using Twitter Streaming API.
 
 `python3` is being used as per this release.
