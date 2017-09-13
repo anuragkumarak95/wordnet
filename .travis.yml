@@ -1,2 +1,12 @@
+https://travis-ci.org/anuragkumarak95/wordnet
 language: python
+python:
+- "3.2"
+- "3.3"
+- "3.4"
+- "3.5"
+- "3.6"
+- "nightly"
+- "pypy3
+
 script: python test.py
