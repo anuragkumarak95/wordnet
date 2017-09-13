@@ -1,4 +1,4 @@
-https://travis-ci.org/anuragkumarak95/wordnet
+# https://travis-ci.org/anuragkumarak95/wordnet
 language: python
 python:
   - "3.2"
