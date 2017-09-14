@@ -1,0 +1,22 @@
+Author Anurag Kumar (anuragkumarak95@gmail.com)
+
+word_net.py experiment 14 Sept,2017 : 
+
+    I used 2 arrays stucture to same word networks because using the word instance itself was using a lot of memory. Using arrays have reduced 
+    memory with a 30-35 % reduction in memory. Total memory usage is still a big concern.
+
+    What I am dumping is basically 2 arrays, containing:
+        - words_arr : list of unique words
+        - relatives : 2D list of relative words indexed according to above list.
+
+    The relative 2D list contains index values  of words rather than words themselves to reduce memory consumption. My concerns right now include 
+    large conputation time and multiple iteration over same dictionary of word instances (which could also be leading to wrong interpretation of 
+    word indexes). I should certainly stop using word instances for this purpose and create double list combination right away for every word.
+
+    Next important step involve ploting a 3D word network,which will be interesting and creating better build test variations for which I have
+    to understand Travis-CI in better light. 
+    
+    One of my friends have given a very creative utilization idea for this module which is to create a project that can be provided with few 
+    lines and it could gather words that are available in WordNet network and output words that are relatively under 2nd or 3rd degree of network 
+    hierarchy. This could help a user to gather words related to certain topic, as sometimes people can create good sentences when they have a 
+    set of words avaliable to them. Really great idea!
