@@ -1,4 +1,4 @@
-# WordNet ![buid-status](https://travis-ci.org/anuragkumarak95/wordnet.svg?branch=master)
+# WordNet [![Build Status](https://travis-ci.org/anuragkumarak95/wordnet.svg?branch=master)](https://travis-ci.org/anuragkumarak95/wordnet)  [![codecov](https://codecov.io/gh/anuragkumarak95/wordnet/branch/master/graph/badge.svg)](https://codecov.io/gh/anuragkumarak95/wordnet)
 
 Create a Simple network of words related to each other using Twitter Streaming API.
 
