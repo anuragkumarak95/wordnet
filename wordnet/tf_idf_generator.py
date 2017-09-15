@@ -2,7 +2,7 @@ import datetime, os, math, argparse, pickle, glob
 from colorama import Fore, Style
 import pickle
 
-from bin.paint import paint #custom module for coloring different strings.
+from .bin import paint  #custom module for coloring different strings.
 '''TO-DO
 1. find a better way to dump tf-idf values, too much data being used for now using list of dict
 2. try to find more efficient ways to compute and calculate TF-IDF values , loop reduction required.
@@ -11,7 +11,20 @@ from bin.paint import paint #custom module for coloring different strings.
 '''
 
 TAG = paint('TF-IDF-GENE/','b')
-def find_tf_idf(file_names=['test/testdata'],prev_file_path=None):
+def find_tf_idf(file_names=['./../test/testdata'],prev_file_path=None, dump_path=None):
+    '''Function to create a TF-IDF list of dictionaries for a corpus of docs.
+
+    @Args:
+    --
+    file_names : paths of files to be processed on, these files are created using twitter_streaming module.
+    prev_file_path : path of old .tfidfpkl file, if available. (default=None)
+    dump_path : directory-path where to dump generated lists.(default=None)
+
+    @returns:
+    --
+    idf : a dict of unique words in corpus,with their document frequency as values.
+    tf_idf : the generated tf-idf list of dictionaries for mentioned docs.
+    '''
     tf_idf = [] # will hold a dict of word_count for every doc(line in a doc in this case)
     idf = {}
 
@@ -51,21 +64,9 @@ def find_tf_idf(file_names=['test/testdata'],prev_file_path=None):
 
     print(TAG,'Total number of unique words in corpus',len(idf),'( '+paint('++'+str(len(idf)-prev_doc_count),'g')+' )' if prev_file_path else '')
     print(TAG,'Total number of docs in corpus:',len(tf_idf),'( '+paint('++'+str(len(tf_idf)-prev_corpus_length),'g')+' )' if prev_file_path else '')
+    
+    # dump if a dir-path is given
+    if dump_path:
+        pickle.dump((idf,tf_idf),dump_path+'loadout.tfidfpkl',protocol=pickle.HIGHEST_PROTOCOL)
     return idf,tf_idf
 
-if __name__=='__main__':
-    ap = argparse.ArgumentParser()
-    ap.add_argument("-d", "--docs", required=True, help="path to folder containing document files")
-    ap.add_argument("-f", "--file", help="path to previous tf-idf file")
-    args = vars(ap.parse_args())
-
-
-    doc_paths = glob.glob(args['docs']+'*')    
-    print(TAG,'Fetched files: ',doc_paths) 
-    
-    idf,tf_idf = find_tf_idf(doc_paths,args['file'])
-    
-    #dump the generated TF-IDF in a file for further usage.
-    out_path = 'loadouts/loadout.tfidfpkl'
-    pickle.dump((idf,tf_idf), open(out_path,'wb'), protocol=pickle.HIGHEST_PROTOCOL)
-    print(TAG,'TF-IDF generation process ended, pickle file  dumped @ ',out_path)

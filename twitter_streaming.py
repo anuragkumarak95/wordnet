@@ -5,10 +5,10 @@ import json
 import http.client
 import urllib3
 import sys
+from  wordnet.bin import paint
 import config as cf
 import re
 
-from bin.paint import paint
 TAG = paint('Twitter-Scrapper/','b')
 
 #This is a basic listener that just prints received tweets to stdout.

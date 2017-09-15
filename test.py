@@ -4,9 +4,8 @@ Module made for the soul purpose of build testing and validation.
 
 This module will test only the functionalities of tf_idf_generator.py and nn_words.py. twitter_streaming.py can't be tested without confidential credetials(config.py file, have a look @ /README.md for further queries).
 '''
-from bin.paint import paint
-from nn_words import find_knn 
-from tf_idf_generator import find_tf_idf
+import wordnet.bin.paint
+from wordnet import * 
 
 TAG=paint('TEST/','b')
 
@@ -21,7 +20,7 @@ out_dict = {
 tf_idf = []
 def __init__():
     # generating tf-idf from test/testdata file(default tf-idf file)
-    _, tfidf = find_tf_idf()
+    _, tfidf = find_tf_idf(['test/testdata'])
     global tf_idf
     tf_idf = tfidf
 
