@@ -18,14 +18,14 @@ out_dict = {
 ,'OUT_TRUE_4' : ['punjab', 'Whther', 'evergreen', 'haryana', 'victam', 'Sikhs', 'delhi', 'rocks', 'godmen']
 ,'OUT_TRUE_5' : ['neggie', 'lanny', 'quicky', 'jetpackers', 'shepherd', 'kline', 'schoolgirl', 'barbie', 'entirely', 'crussades']
 }
-# test cases and var end
 
-tf_idf = []
+
 def __init__():
     # generating tf-idf from test/testdata file(default tf-idf file)
-    _, tfidf = find_tf_idf(['test/testdata'])
+    global idf
     global tf_idf
-    tf_idf = tfidf
+    idf, tf_idf = find_tf_idf(['test/testdata'])
+    
 
 def test_nnwords(word):
     out = []
@@ -41,6 +41,14 @@ class TestWordNet(unittest.TestCase):
                 sorted(test_nnwords(words[i-1])),
                 sorted(out_dict['OUT_TRUE_'+str(i)])
             )
+
+    def test_wordnet_module(self):
+        w,r = generate_net(idf,tf_idf,'test/test.wrnt')
+        with open('test/test.wrnt','rb') as f:
+            a_w,a_r = pickle.load(f)
+    
+        self.assertEquals(a_w,w)
+        self.assertEquals(a_r,r)
 
 if __name__=="__main__":
     __init__()
