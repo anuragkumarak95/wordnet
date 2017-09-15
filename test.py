@@ -41,7 +41,11 @@ class TestWordNet(unittest.TestCase):
                 sorted(test_nnwords(words[i-1])),
                 sorted(out_dict['OUT_TRUE_'+str(i)])
             )
-
+    
+    # this function is  not working stable, 
+    # it produces new list of words ,every time.
+    # have a look at word_net.py, why is this happening.
+    # and change dumpt_path=None after solution.
     def test_wordnet_module(self):
         w,r = generate_net(idf,tf_idf,'test/test.wrnt')
         with open('test/test.wrnt','rb') as f:

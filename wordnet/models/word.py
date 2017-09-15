@@ -19,8 +19,8 @@ class Word():
     '''
     def __init__(self,w,b_links=None,f_links=None):
         self.w = w
-        self.bkwrd_links = b_links if b_links else []
-        self.frwrd_links = f_links if f_links else []
+        self.bkwrd_links = b_links if b_links else set([]) # not being used for now.
+        self.frwrd_links = f_links if f_links else set([])
     
     # getters and setters
     def getw(self):
@@ -43,7 +43,7 @@ class Word():
 
     # helper methods
     def addtobkwrd_links(self, links):
-        self.bkwrd_links.extend([i])
+        self.bkwrd_links.update(links)
 
     def addtofrwrd_links(self, links):
-        self.frwrd_links.extend(set(links))
+        self.frwrd_links.update(links)
