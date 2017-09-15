@@ -6,10 +6,8 @@ from .models import Word
 import pickle, sys, time
 from .bin import paint
 
-# file_path for dumping data
-dump_file = '../loadouts/word_net.wrdnt'
 TAG = paint('WORDNET/','b')
-def generate_net(idf,tf_idf,toDump=False):
+def generate_net(idf,tf_idf,dump_path=None):
     word_net = {} # list of word entities.
     
     #registering all word instances in a dict of network
@@ -37,9 +35,9 @@ def generate_net(idf,tf_idf,toDump=False):
         print('\r'+TAG+' '+paint(str((i/total)*100),'r')+'% completed...',end='')    
         relatives.append([words[w] if w else None for w in word.frwrd_links]) 
     print()
-    # Dump the generated lists if toDump is True.
-    if toDump:
-        pickle.dump((words_arr,relatives),open(dump_file,'wb'),protocol=pickle.HIGHEST_PROTOCOL)
+    # Dump the generated lists if dump_path is given.
+    if dump_path:
+        pickle.dump((words_arr,relatives),open(dump_path,'wb'),protocol=pickle.HIGHEST_PROTOCOL)
         print(TAG,'word network dumped @',dump_file)
     
     return words_arr,relatives

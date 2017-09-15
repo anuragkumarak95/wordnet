@@ -16,7 +16,7 @@ Three major parts are in this project.
 
 ## Way to go
 
-1. Clone this repo and go to root-dir(wordnet), Create a config.py file with details mentioned below:
+1. Clone this repo and go to root-dir(~), Create a config.py file with details mentioned below:
     ```python
     # Variables that contains the user credentials to access Twitter Streaming API
     # this link will help you(http://socialmedia-class.org/twittertutorial.html)
@@ -69,9 +69,9 @@ Three major parts are in this project.
     form wordnet import generate_net
 
     generate_net(
-        idf=idf,        # this tf_idf is returned by find_tf_idf() above.
-        tf_idf=tf_idf,  # this idf is returned by find_tf_idf() above.
-        toDump=False    # toDump = either to dump the generated network or not. default = False
+        idf=idf,                        # this tf_idf is returned by find_tf_idf() above.
+        tf_idf=tf_idf,                  # this idf is returned by find_tf_idf() above.
+        dump_path='path/to/dump.wrnt'   # dump_path = path to dump the generated files. default=None
     )
 
     '''

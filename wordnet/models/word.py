@@ -14,7 +14,9 @@ Behaviours
 '''
 
 class Word():
-   
+    '''
+
+    '''
     def __init__(self,w,b_links=None,f_links=None):
         self.w = w
         self.bkwrd_links = b_links if b_links else []
@@ -40,13 +42,8 @@ class Word():
         self.frwrd_links = f_links
 
     # helper methods
-    def addtobkwrd_links(self,links):
-        for i in links:
-            if i not in frwrd_links:
-                self.bkwrd_links.extend([i])
+    def addtobkwrd_links(self, links):
+        self.bkwrd_links.extend([i])
 
-    def addtofrwrd_links(self,links):
-        self.frwrd_links.extend(links)
-
-
-
+    def addtofrwrd_links(self, links):
+        self.frwrd_links.extend(set(links))
