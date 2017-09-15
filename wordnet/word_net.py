@@ -37,7 +37,7 @@ def generate_net(idf,tf_idf,toDump=False):
         print('\r'+TAG+' '+paint(str((i/total)*100),'r')+'% completed...',end='')    
         relatives.append([words[w] if w else None for w in word.frwrd_links]) 
     print()
-    # DUmp the generated lists if toDump is True.
+    # Dump the generated lists if toDump is True.
     if toDump:
         pickle.dump((words_arr,relatives),open(dump_file,'wb'),protocol=pickle.HIGHEST_PROTOCOL)
         print(TAG,'word network dumped @',dump_file)

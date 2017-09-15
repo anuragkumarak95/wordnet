@@ -10,9 +10,9 @@ run on bash '`$pip3 install -r requirements.txt`' @ root directory and you will 
 
 Three major parts are in this project.
 
-* `Streamer` : twitter_streaming.py
-* `TF-IDF` Gene : tf_idf_generator.py
-* `NN` words Gene : nn_words.py
+* `Streamer` : ~/twitter_streaming.py
+* `TF-IDF` Gene : ~/wordnet/tf_idf_generator.py
+* `NN` words Gene :~/ wordnet/nn_words.py
 
 ## Way to go
 
@@ -27,11 +27,57 @@ Three major parts are in this project.
     ```
 1. run `Streamer` with an array of filter words that you want to fetch tweets on. eg. `$python3 twitter_streaming.py hello hi hallo namaste > data_file.txt` this will save a line by line words from tweets filtered according to words used as args in `data_file.txt`.
 
-1. run `TF-IDF GENE` for generating a TF-IDF file for further process. eg. `$python3 tf_idf_generator.py -d path/` this will generate a loadout.tfidfpkl file at the root dir. note# [current release](https://github.com/anuragkumarak95/wordnet/releases/tag/v0.0.1-beta) is generating a very large file from this process. I am woring on it. :+1:
+1. To create a TF-IDF structure file for every doc, use:
 
-1. run `NN Words Gene` for finally generating words that are relative to a specified word from given file. eg. `$python3 nn_words.py -f loadout.tfidfpkl -w hello` this will output a list of words nearly related to the `hello` word provided in the command by looking at the given `loadout.tfidfpkl` file.
+    ```python
+        from wordnet import find_tf_idf
 
-> **Step 1, 2 & 3** are needed to be done once only, and repeat **Step 4** as you feel free.
+        find_tf_idf(
+            file_names=['file/path1','file/path2',..],    # paths of files to be processed.
+            prev_file_path='prev/tf/idf/file/path',       # prev TF_IDF file to modify over.
+            dump_path='path/to/dump/file'                 # dump_path if tf-idf needs to be dumped.
+        )
+
+        '''
+        if no file is provided prev_file_path parameter, new TF-IDF file will be generated ,and else T
+        F-IDF values will be combined with previous file, and dumped at dump_path if mentioned,
+        else will only return the new tf-idf list of dictionaries.
+        '''
+    ```
+1. To use `NN` Word Gene of this module, simply use wordnet.find_knn:
+
+    ```python
+    from wordnet import find_knn
+
+    find_knn(
+        tf_idf=tf_idf,       # this tf_idf is returned by find_tf_idf() above.
+        input_word='german', # a word for which k nearest neighbours are required.
+        k=10,                # k = number of neighbours required, default=10
+        rand_on=True         # rand_on = either to randomly skip few words or show initial k words, default=True
+    )
+
+    '''
+    This function will return a list of words closely related to provided input_word refering to tf_idf var provided to it. either use find_tf_idf() to gather this var or pickle.load() a dump
+    file dumped by the same function at your choosen directory. the file contains 2 lists in format
+    (idf, tf_idf).
+    '''
+    ```
+
+1. To create a Word Network, use :
+
+    ```python
+    form wordnet import generate_net
+
+    generate_net(
+        idf=idf,        # this tf_idf is returned by find_tf_idf() above.
+        tf_idf=tf_idf,  # this idf is returned by find_tf_idf() above.
+        toDump=False    # toDump = either to dump the generated network or not. default = False
+    )
+
+    '''
+    this function returns 2 lists, which are (words_arr,relatives) where words_arr is list of unique words and realtives is a 2D array of indexes of those words representine a link between words.
+    '''
+    ```
 
 ### Test Run
 
