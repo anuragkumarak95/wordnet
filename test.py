@@ -43,6 +43,8 @@ class TestWordNet(unittest.TestCase):
         w2.setw('test')
         w2.setbkwrd_links(set(['case']))
         w2.setfrwrd_links(set(['#2']))
+        w2.addtobkwrd_links(set([]))
+        w2.addtofrwrd_links(set([]))
         #assertions        
         self.assertEquals(w1.w,w2.getw())
         self.assertEquals(w1.bkwrd_links,w2.getbkwrd_links())
