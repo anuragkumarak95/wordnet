@@ -35,11 +35,12 @@ def generate_net(idf,tf_idf,dump_path=None):
     
     print(TAG, 'created words_arr for output...',datetime.now()-start_t)    
     
-    total = len(words)
-    i=0 # % counter var
+    # total = len(words)
+    # i=0 # % counter var
     for _,word in word_net.items():
-        i+=1
-        print('\r'+TAG+' '+paint(str(int((i/total)*100)),'r')+'% completed...',end='')    
+        #  # this print statement gives error in python 2.6,2.7,3.2. comment until compatible replacement found.
+        # i+=1
+        # print('\r'+TAG+' '+paint(str(int((i/total)*100)),'r')+'% completed...',end='')    
         relatives.append([words[w] for w in word.frwrd_links]) 
     print()
     print(TAG, 'created final relative-words list.. return ready.',datetime.now()-start_t)
