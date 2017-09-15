@@ -47,7 +47,8 @@ def generate_net(idf,tf_idf,dump_path=None):
     
     # Dump the generated lists if dump_path is given.
     if dump_path:
-        pickle.dump((words_arr,relatives),open(dump_path,'wb'),protocol=pickle.HIGHEST_PROTOCOL)
-        print(TAG,'word network dumped @',dump_path,datetime.now()-start_t)
+        if dump_path[-4:] == 'wrnt':
+            pickle.dump((words_arr,relatives),open(dump_path,'wb'),protocol=pickle.HIGHEST_PROTOCOL)
+            print(TAG,'word network dumped @',dump_path,datetime.now()-start_t)
     
     return words_arr,relatives

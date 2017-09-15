@@ -33,9 +33,9 @@ Three major parts are in this project.
         from wordnet import find_tf_idf
 
         find_tf_idf(
-            file_names=['file/path1','file/path2',..],    # paths of files to be processed.
-            prev_file_path='prev/tf/idf/file/path',       # prev TF_IDF file to modify over.
-            dump_path='path/to/dump/file'                 # dump_path if tf-idf needs to be dumped.
+            file_names=['file/path1','file/path2',..],       # paths of files to be processed.
+            prev_file_path='prev/tf/idf/file/path.tfidfpkl', # prev TF_IDF file to modify over, format standard is .tfidfpkl. default = None
+            dump_path='path/to/dump/file.tfidfpkl'           # dump_path if tf-idf needs to be dumped, format standard is .tfidfpkl. default = None
         )
 
         '''
@@ -71,7 +71,7 @@ Three major parts are in this project.
     generate_net(
         idf=idf,                        # this tf_idf is returned by find_tf_idf() above.
         tf_idf=tf_idf,                  # this idf is returned by find_tf_idf() above.
-        dump_path='path/to/dump.wrnt'   # dump_path = path to dump the generated files. default=None
+        dump_path='path/to/dump.wrnt'   # dump_path = path to dump the generated files, format standard is .wrnt. default=None
     )
 
     '''

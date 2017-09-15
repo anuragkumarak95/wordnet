@@ -69,5 +69,6 @@ def find_tf_idf(file_names=['./../test/testdata'],prev_file_path=None, dump_path
     if dump_path:
         if dump_path[-8:] == 'tfidfpkl': 
             pickle.dump((idf,tf_idf),open(dump_path,'wb'),protocol=pickle.HIGHEST_PROTOCOL)
+            print(TAG,'Dumping TF-IDF vars @',dump_path)
     return idf,tf_idf
 
