@@ -6,7 +6,7 @@ This module will test only the functionalities of tf_idf_generator.py and nn_wor
 '''
 import wordnet.bin.paint
 from wordnet import * 
-import unittest
+import unittest, os
 
 TAG=paint('TEST/','b')
 # test cases and var
@@ -25,7 +25,13 @@ def __init__():
     # generating tf-idf from test/testdata file(default tf-idf file)
     global idf
     global tf_idf
-    idf, tf_idf = find_tf_idf(['test/testdata'])
+    idf, tf_idf = find_tf_idf(['test/testdata'],None,'test/dump.tfidfpkl')
+    
+    # to cover find_tf_idf() lines that execute when prev_file is given.
+    temp1,temp2 = find_tf_idf(['test/testdata'],'test/dump.tfidfpkl')
+    del temp1
+    del temp2
+    os.remove('test/dump.tfidfpkl')
     
 
 def test_nnwords(word):
@@ -72,6 +78,7 @@ class TestWordNet(unittest.TestCase):
         self.assertEquals(a_w,w)
         self.assertEquals(a_r,r)
         #cleaning
+        os.remove('test/test.wrnt')
         del a_w
         del a_r
         del w
