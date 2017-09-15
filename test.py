@@ -20,6 +20,7 @@ out_dict = {
 }
 
 
+
 def __init__():
     # generating tf-idf from test/testdata file(default tf-idf file)
     global idf
@@ -35,6 +36,21 @@ def test_nnwords(word):
 
 # unittest class for Testing.
 class TestWordNet(unittest.TestCase):
+    
+    def test_word(self):
+        w1 = Word('test',set(['case']),set(['#1']))
+        w2 = Word('test_new')
+        w2.setw('test')
+        w2.setbkwrd_links(set(['case']))
+        w2.setfrwrd_links(set(['#2']))
+        #assertions        
+        self.assertEquals(w1.w,w2.getw())
+        self.assertEquals(w1.bkwrd_links,w2.getbkwrd_links())
+        self.assertFalse(w1.frwrd_links==w2.getfrwrd_links())
+        #cleaning
+        del w1
+        del w2        
+    
     def test_nnwords_module(self):
         for i in range(1,5):
             self.assertEquals(
@@ -53,6 +69,11 @@ class TestWordNet(unittest.TestCase):
     
         self.assertEquals(a_w,w)
         self.assertEquals(a_r,r)
+        #cleaning
+        del a_w
+        del a_r
+        del w
+        del r
 
 if __name__=="__main__":
     __init__()

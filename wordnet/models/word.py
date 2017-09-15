@@ -38,7 +38,7 @@ class Word():
     def getfrwrd_links(self):
         return self.frwrd_links
 
-    def setbfrwrd_links(self,f_links):
+    def setfrwrd_links(self,f_links):
         self.frwrd_links = f_links
 
     # helper methods
