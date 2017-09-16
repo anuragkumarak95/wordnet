@@ -11,8 +11,9 @@ python:
   - nightly
 
 install:
+  - pip install -r requirements.txt
   - pip install codecov
-  - python setup.py install
+  #- python setup.py install
 
 script: 
   - coverage run test.py
