@@ -1,18 +1,19 @@
 # WordNet [![Build Status](https://travis-ci.org/anuragkumarak95/wordnet.svg?branch=master)](https://travis-ci.org/anuragkumarak95/wordnet)  [![codecov](https://codecov.io/gh/anuragkumarak95/wordnet/branch/master/graph/badge.svg)](https://codecov.io/gh/anuragkumarak95/wordnet)
 
-Create a Simple network of words related to each other using Twitter Streaming API.
+Create a Simple **network of words** related to each other using **Twitter Streaming API**.
 
-`python3` is being used as per this release.
+`python-3.5` is being used as per this Project.
 
-## requirements ( use pip3 )
+## requirements( use pip )
 
-run on bash '`$pip3 install -r requirements.txt`' @ root directory and you will be ready to go..
+run on bash '`$pip install -r requirements.txt`' @ root directory and you will be ready to go..
 
 Three major parts are in this project.
 
 * `Streamer` : ~/twitter_streaming.py
 * `TF-IDF` Gene : ~/wordnet/tf_idf_generator.py
 * `NN` words Gene :~/ wordnet/nn_words.py
+* `NETWORK` Gene : ~/wordnet/word_net.py
 
 ## Way to go
 
@@ -25,9 +26,9 @@ Three major parts are in this project.
     consumer_key = "xxxxxx"
     consumer_secret = "xxxxxxxx"
     ```
-1. run `Streamer` with an array of filter words that you want to fetch tweets on. eg. `$python3 twitter_streaming.py hello hi hallo namaste > data_file.txt` this will save a line by line words from tweets filtered according to words used as args in `data_file.txt`.
+1. run `Streamer` with an array of filter words that you want to fetch tweets on. eg. `$python twitter_streaming.py hello hi hallo namaste > data_file.txt` this will save a line by line words from tweets filtered according to words used as args in `data_file.txt`.
 
-1. To create a TF-IDF structure file for every doc, use:
+1. To create a `TF-IDF` structure file for every doc, use:
 
     ```python
         from wordnet import find_tf_idf
@@ -63,7 +64,7 @@ Three major parts are in this project.
     '''
     ```
 
-1. To create a Word Network, use :
+1. To create a Word `Network`, use :
 
     ```python
     form wordnet import generate_net
@@ -81,8 +82,14 @@ Three major parts are in this project.
 
 ### Test Run
 
-To run a formal test, simply run this script. `python3 test.py`, this module will return **0** if everythinig worked as expected.
+To run a formal test, simply run this script. `python test.py`, this module will return **0** if everythinig worked as expected.
 
-test.py uses sample data provided [here](./test/testdata) and executes tf_idf_generator.py & nn_words.py.
+test.py uses sample data provided [here](./test/testdata) and executes unittest on `find_tf_idf()`, `find_knn()` & `generate_net()`.
 
-**Developed** with ![love](./icons/heart_min.png) by [@Anurag](https://github.com/anuragkumarak95)
+> `Streamer` functionality will not be provided under distribution of this code. That is just a script independent from the module.
+
+#### Contributions Are welcomed here
+
+![BUILT WITH LOVE](http://forthebadge.com/images/badges/built-with-love.svg)
+
+by [@Anurag](https://github.com/anuragkumarak95)
