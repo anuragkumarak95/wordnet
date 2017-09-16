@@ -110,3 +110,6 @@ config.py
 
 # mypy
 .mypy_cache/
+
+# Visual Studio Code config directory
+.vscode/
