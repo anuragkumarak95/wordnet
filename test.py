@@ -6,7 +6,7 @@ This module will test only the functionalities of tf_idf_generator.py and nn_wor
 '''
 import wordnet.bin.paint
 from wordnet import * 
-import unittest, os
+import unittest, os, pickle
 
 TAG=paint('TEST/','b')
 # test cases and var
@@ -78,7 +78,7 @@ class TestWordNet(unittest.TestCase):
 
         # WordNet Generate Net module walkthrough
         wrnt_name = 'test/test.wrnt'
-        w,r = generate_net(idf,tf_idf,wrnt_name)
+        w,r = generate_net(idf,tf_idf)
         with open(wrnt_name,'rb') as f:
             a_w,a_r = pickle.load(f)
         
@@ -95,6 +95,9 @@ class TestWordNet(unittest.TestCase):
         self.assertEquals(len(a_r),len(r))
         self.assertEquals(len(a_w),len(r_w))
         self.assertEquals(len(a_r),len(r_r))
+
+        # covering dump section of generate_net()
+        generate_net(idf,tf_idf,wrnt_name)
         
         # cleaning as we move on!
         del a_w
