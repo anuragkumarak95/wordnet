@@ -78,7 +78,7 @@ class TestWordNet(unittest.TestCase):
 
         # WordNet Generate Net module walkthrough
         wrnt_name = 'test/test.wrnt'
-        w,r = generate_net(idf,tf_idf)
+        w,r = generate_net(idf,tf_idf,wrnt_name)
         with open(wrnt_name,'rb') as f:
             a_w,a_r = pickle.load(f)
         
