@@ -2,7 +2,7 @@
 
 Create a Simple **network of words** related to each other using **Twitter Streaming API**.
 
-`python-3.5` is being used as per this Project.
+![Made with python-3.5](http://forthebadge.com/images/badges/made-with-python.svg)
 
 ## requirements( use pip )
 
@@ -31,30 +31,30 @@ Three major parts are in this project.
 1. To create a `TF-IDF` structure file for every doc, use:
 
     ```python
-        from wordnet import find_tf_idf
+    from wordnet import find_tf_idf
 
-        find_tf_idf(
-            file_names=['file/path1','file/path2',..],       # paths of files to be processed.
-            prev_file_path='prev/tf/idf/file/path.tfidfpkl', # prev TF_IDF file to modify over, format standard is .tfidfpkl. default = None
-            dump_path='path/to/dump/file.tfidfpkl'           # dump_path if tf-idf needs to be dumped, format standard is .tfidfpkl. default = None
-        )
+    idf, tf_idf = find_tf_idf(
+    file_names=['file/path1','file/path2',..],       # paths of files to be processed.
+    prev_file_path='prev/tf/idf/file/path.tfidfpkl', # prev TF_IDF file to modify over, format standard is .tfidfpkl. default = None
+    dump_path='path/to/dump/file.tfidfpkl'           # dump_path if tf-idf needs to be dumped, format standard is .tfidfpkl. default = None
+    )
 
-        '''
-        if no file is provided prev_file_path parameter, new TF-IDF file will be generated ,and else T
-        F-IDF values will be combined with previous file, and dumped at dump_path if mentioned,
-        else will only return the new tf-idf list of dictionaries.
-        '''
+    '''
+    if no file is provided prev_file_path parameter, new TF-IDF file will be generated ,and else T
+    F-IDF values will be combined with previous file, and dumped at dump_path if mentioned,
+    else will only return the new tf-idf list of dictionaries.
+    '''
     ```
 1. To use `NN` Word Gene of this module, simply use wordnet.find_knn:
 
     ```python
     from wordnet import find_knn
 
-    find_knn(
-        tf_idf=tf_idf,       # this tf_idf is returned by find_tf_idf() above.
-        input_word='german', # a word for which k nearest neighbours are required.
-        k=10,                # k = number of neighbours required, default=10
-        rand_on=True         # rand_on = either to randomly skip few words or show initial k words, default=True
+    words = find_knn(
+    tf_idf=tf_idf,       # this tf_idf is returned by find_tf_idf() above.
+    input_word='german', # a word for which k nearest neighbours are required.
+    k=10,                # k = number of neighbours required, default=10
+    rand_on=True         # rand_on = either to randomly skip few words or show initial k words default=True
     )
 
     '''
@@ -69,10 +69,10 @@ Three major parts are in this project.
     ```python
     form wordnet import generate_net
 
-    generate_net(
-        idf=idf,                        # this tf_idf is returned by find_tf_idf() above.
-        tf_idf=tf_idf,                  # this idf is returned by find_tf_idf() above.
-        dump_path='path/to/dump.wrnt'   # dump_path = path to dump the generated files, format standard is .wrnt. default=None
+    words_arr, relatives = generate_net(
+    idf=idf,                        # this tf_idf is returned by find_tf_idf() above.
+    tf_idf=tf_idf,                  # this idf is returned by find_tf_idf() above.
+    dump_path='path/to/dump.wrnt'   # dump_path = path to dump the generated files, format standard is .wrnt. default=None
     )
 
     '''
