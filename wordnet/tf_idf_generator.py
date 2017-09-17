@@ -1,7 +1,29 @@
-import datetime, os, math, argparse, pickle, glob
+'''@Author: Anurag Kumar(mailto:anuragkumarak95@gmail.com) 
+This module is used for generating a TF-IDF file or values from a list of files that contains docs.
+
+sample file format of input:
+    
+    ##START(NOT INCLUDED)
+    sport smile today because signs Gemini
+    little sister dealt severe allergy figure
+    about looks gender color attitude nationality respect
+    added video playlist Sonic Fightstick Edition
+    weeks birthday scott wants camping keeper
+    photo taking photo trying auction scale photo
+    happy creatively capture story stage magical
+    yoongi looks seokjin looking yoongi looking seokjin
+    taking glasses because buffering cannot handle
+    tried Michelle Obama proceeded defend whole pointless
+    robbed shades backstage reading guess karma stealing
+    remains sailors destroyer McCain collision found
+    timeline beginnings infographics Catch upcoming debut
+    ##END(NOT INCLUDED)
+
+here, every line represents a document.
+'''
+import os, math, pickle
 from colorama import Fore, Style
 import pickle
-
 from .bin import paint  #custom module for coloring different strings.
 '''TO-DO
 1. find a better way to dump tf-idf values, too much data being used for now using list of dict
@@ -13,6 +35,8 @@ from .bin import paint  #custom module for coloring different strings.
 TAG = paint('TF-IDF-GENE/','b')
 def find_tf_idf(file_names=['./../test/testdata'],prev_file_path=None, dump_path=None):
     '''Function to create a TF-IDF list of dictionaries for a corpus of docs.
+    If you opt for dumping the data, you can provide a file_path with .tfidfpkl extension(standard made for better understanding)
+    and also re-generate a new tfidf list which overrides over an old one by mentioning its path.
 
     @Args:
     --
