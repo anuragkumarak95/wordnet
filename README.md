@@ -8,7 +8,7 @@ Create a Simple **network of words** related to each other using **Twitter Strea
 
 ![Made with python-3.5](http://forthebadge.com/images/badges/made-with-python.svg)
 
-Three major parts are in this project.
+Major parts of this project.
 
 * `Streamer` : ~/twitter_streaming.py
 * `TF-IDF` Gene : ~/wordnet/tf_idf_generator.py
@@ -17,9 +17,9 @@ Three major parts are in this project.
 
 ## Using Streamer Functionality
 
-1. run on bash '`$pip install -r requirements.txt`' @ root directory and you will be ready to go..
+1. `Clone this repo` and run on bash '`$pip install -r requirements.txt`' @ root directory and you will be ready to go..
 
-1. Clone this repo and go to root-dir(~), Create a config.py file with details mentioned below:
+1. Go to root-dir(~), Create a config.py file with details mentioned below:
     ```python
     # Variables that contains the user credentials to access Twitter Streaming API
     # this link will help you(http://socialmedia-class.org/twittertutorial.html)
@@ -32,7 +32,7 @@ Three major parts are in this project.
 
 ## Using WordNet Module
 
-1. install wordnet module using this script, 
+1. `Clone this repo` and install wordnet module using this script,
 
         $python setup.py install
 
@@ -41,7 +41,7 @@ Three major parts are in this project.
     ```python
     from wordnet import find_tf_idf
 
-    idf, tf_idf = find_tf_idf(
+    df, tf_idf = find_tf_idf(
     file_names=['file/path1','file/path2',..],       # paths of files to be processed.(create using twitter_streamer.py)
     prev_file_path='prev/tf/idf/file/path.tfidfpkl', # prev TF_IDF file to modify over, format standard is .tfidfpkl. default = None
     dump_path='path/to/dump/file.tfidfpkl'           # dump_path if tf-idf needs to be dumped, format standard is .tfidfpkl. default = None
@@ -50,7 +50,7 @@ Three major parts are in this project.
     '''
     if no file is provided prev_file_path parameter, new TF-IDF file will be generated ,and else
     TF-IDF values will be combined with previous file, and dumped at dump_path if mentioned,
-    else will only return the new tf-idf list of dictionaries.
+    else will only return the new tf-idf list of dictionaries, and df dictionary.
     '''
     ```
 1. To use `NN` Word Gene of this module, simply use wordnet.find_knn:
@@ -76,16 +76,29 @@ Three major parts are in this project.
 1. To create a Word `Network`, use :
 
     ```python
-    form wordnet import generate_net
+    from wordnet import generate_net
 
-    words_arr, relatives = generate_net(
-    idf=idf,                        # this tf_idf is returned by find_tf_idf() above.
-    tf_idf=tf_idf,                  # this idf is returned by find_tf_idf() above.
+    word_net = generate_net(
+    df=df,                          # this df is returned by find_tf_idf() above.
+    tf_idf=tf_idf,                  # this tf_idf is returned by find_tf_idf() above.
     dump_path='path/to/dump.wrnt'   # dump_path = path to dump the generated files, format standard is .wrnt. default=None
     )
 
     '''
-    this function returns 2 lists, which are (words_arr,relatives) where words_arr is list of unique words and realtives is a 2D array of indexes of those words representine a link between words.
+    this function returns a list of Word entities.
+    '''
+    ```
+
+1. To retrive a Word `Network`, use :
+
+    ```python
+    from wordnet import retrieve_net
+
+    word_net = retrieve_net(
+        'path/to/network.wrnt' # path to network file, format standard is .wrnt.
+        )
+    '''
+    this function returns a list of Word entities.
     '''
     ```
 

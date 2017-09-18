@@ -20,9 +20,9 @@ out_dict = {
 }
 def __init__():
     # generating tf-idf from test/testdata file(default tf-idf file)
-    global idf
+    global df
     global tf_idf
-    idf, tf_idf = find_tf_idf(['test/testdata'],None,'test/dump.tfidfpkl')
+    df, tf_idf = find_tf_idf(['test/testdata'],None,'test/dump.tfidfpkl')
     
     # to cover find_tf_idf() lines that execute when prev_file is given.
     temp1,temp2 = find_tf_idf(['test/testdata'],'test/dump.tfidfpkl')
@@ -65,7 +65,7 @@ class TestWordNet(unittest.TestCase):
     def test_wordnet_module(self):
         # testing error raise code.
         wrng_name = 'test/test.wrng'
-        self.assertRaises(Exception, generate_net, (idf,tf_idf,wrng_name))
+        self.assertRaises(Exception, generate_net, (df,tf_idf,wrng_name))
         self.assertRaises(Exception, retrieve_net, (wrng_name))
 
         #test file
@@ -73,7 +73,7 @@ class TestWordNet(unittest.TestCase):
         # WordNet Reatrieve Net module walkthrough
         word_net_ret = retrieve_net(wrnt_name)
         # WordNet Generate Net module walkthrough
-        word_net_gen = generate_net(idf,tf_idf)
+        word_net_gen = generate_net(df,tf_idf)
         
         # assertion or generated and retrived networks equality.    
         for word in word_net_gen:
@@ -81,7 +81,7 @@ class TestWordNet(unittest.TestCase):
             self.assertEquals(word_net_gen[word].frwrd_links, word_net_ret[word].frwrd_links)
         
         # covering dump section of generate_net()
-        generate_net(idf,tf_idf,'test/dump.wrnt')
+        generate_net(df,tf_idf,'test/dump.wrnt')
         
         # cleaning as we move on!
         os.remove('test/dump.wrnt')
