@@ -83,7 +83,7 @@ def find_tf_idf(file_names=['./../test/testdata'],prev_file_path=None, dump_path
     for doc in tf_idf:
         for key in doc:
             true_idf = math.log(len(tf_idf)/idf[key])
-            true_tf = doc[key]/len(doc)
+            true_tf = doc[key]/float(len(doc))
             doc[key] = true_tf * true_idf
 
     print(TAG,'Total number of unique words in corpus',len(idf),'( '+paint('++'+str(len(idf)-prev_doc_count),'g')+' )' if prev_file_path else '')

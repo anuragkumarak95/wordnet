@@ -90,7 +90,7 @@ def retrieve_net(wrnt_path):
     # Generating Word() instance dictionary from retrieved network.
     word_net = {}
     for n in network:
-        word_net[n[0]] = Word(n[0],None,set(n[1:]))
+        word_net[n[0]] = Word(n[0],None,set([network[i][0] for i in n[1:]]))
     # deleting useless resources, for efficient memory usage.
     del network
     return word_net

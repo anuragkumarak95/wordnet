@@ -93,7 +93,7 @@ Three major parts are in this project.
 
 To run a formal test, simply run this script. `python test.py`, this module will return **0** if everythinig worked as expected.
 
-test.py uses sample data provided [here](./test/testdata) and executes unittest on `find_tf_idf()`, `find_knn()` & `generate_net()`.
+test.py uses sample data provided [here](https://github.com/anuragkumarak95/wordnet/tree/master/test) and executes unittest on `find_tf_idf()`, `find_knn()` & `generate_net()`.
 
 > `Streamer` functionality will not be provided under distribution of this code. That is just a script independent from the module.
 

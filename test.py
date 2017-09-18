@@ -39,7 +39,7 @@ def test_nnwords(word):
 # unittest class for Testing.
 class TestWordNet(unittest.TestCase):
     
-    def test_word(self):
+    def test_Word_module(self):
         w1 = Word('test',set(['case']),set(['#1']))
         w2 = Word('test_new')
         w2.setw('test')
@@ -67,36 +67,27 @@ class TestWordNet(unittest.TestCase):
         wrng_name = 'test/test.wrng'
         with self.assertRaises(Exception): generate_net(idf,tf_idf,wrng_name)
         with self.assertRaises(Exception): retrieve_net(wrng_name)
-        # WordNet Generate Net module walkthrough
+
+        #test file
         wrnt_name = 'test/test.wrnt'
-        n = generate_net(idf,tf_idf)
-
-        # fetching test case wrnt file.
-        with open(wrnt_name,'rb') as f:
-            a_n = pickle.load(f)
+        # WordNet Reatrieve Net module walkthrough
+        word_net_ret = retrieve_net(wrnt_name)
+        # WordNet Generate Net module walkthrough
+        word_net_gen = generate_net(idf,tf_idf)
         
-        # WordNet Reatrieval module walkthrough
-        word_net = retrieve_net(wrnt_name)
-        r_n=[]
-        for word in word_net:
-            __temp = [word_net[word].w]
-            __temp.extend(word_net[word].frwrd_links)
-            r_n.append(__temp)
-            del __temp
-    
-        # only asserting length right now, as these process are not creating same sequence or words. check needed.
-        self.assertEquals(len(a_n),len(n))
-        self.assertEquals(len(a_n),len(r_n))
-
+        # assertion or generated and retrived networks equality.    
+        for word in word_net_gen:
+            self.assertEquals(word_net_gen[word].w, word_net_ret[word].w)
+            self.assertEquals(word_net_gen[word].frwrd_links, word_net_ret[word].frwrd_links)
+        
         # covering dump section of generate_net()
         generate_net(idf,tf_idf,'test/dump.wrnt')
         
         # cleaning as we move on!
         os.remove('test/dump.wrnt')
-        del a_n
-        del r_n
-        del n
-
+        del word_net_gen
+        del word_net_ret
+        
 if __name__=="__main__":
     __init__()
     unittest.main()
