@@ -65,8 +65,8 @@ class TestWordNet(unittest.TestCase):
     def test_wordnet_module(self):
         # testing error raise code.
         wrng_name = 'test/test.wrng'
-        with self.assertRaises(Exception): generate_net(idf,tf_idf,wrng_name)
-        with self.assertRaises(Exception): retrieve_net(wrng_name)
+        self.assertRaises(Exception, generate_net, (idf,tf_idf,wrng_name))
+        self.assertRaises(Exception, retrieve_net, (wrng_name))
 
         #test file
         wrnt_name = 'test/test.wrnt'
