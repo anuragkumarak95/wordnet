@@ -8,10 +8,6 @@ Create a Simple **network of words** related to each other using **Twitter Strea
 
 ![Made with python-3.5](http://forthebadge.com/images/badges/made-with-python.svg)
 
-## requirements( use pip )
-
-run on bash '`$pip install -r requirements.txt`' @ root directory and you will be ready to go..
-
 Three major parts are in this project.
 
 * `Streamer` : ~/twitter_streaming.py
@@ -20,6 +16,8 @@ Three major parts are in this project.
 * `NETWORK` Gene : ~/wordnet/word_net.py
 
 ## Using Streamer Functionality
+
+1. run on bash '`$pip install -r requirements.txt`' @ root directory and you will be ready to go..
 
 1. Clone this repo and go to root-dir(~), Create a config.py file with details mentioned below:
     ```python
