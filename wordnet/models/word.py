@@ -1,20 +1,17 @@
 '''Author Anurag Kumar 13 Sept, 2017
 
 This module is a Word entity.
- Word-Entity
-
-Attributes
---
-w :             word itself
-bkwrd_links :   words which have this word as their relational word.
-frwrd_links :   words which are realtional to this word.
-
-Behaviours
 --
 '''
 
 class Word():
-    '''
+    ''' Word-Entity
+
+    Attributes
+    --
+    w :             word itself
+    bkwrd_links :   words which have this word as their relational word.
+    frwrd_links :   words which are realtional to this word.
 
     '''
     def __init__(self,w,b_links=None,f_links=None):

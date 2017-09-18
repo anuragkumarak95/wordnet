@@ -19,7 +19,7 @@ Three major parts are in this project.
 * `NN` words Gene :~/ wordnet/nn_words.py
 * `NETWORK` Gene : ~/wordnet/word_net.py
 
-## Way to go
+## Using Streamer Functionality
 
 1. Clone this repo and go to root-dir(~), Create a config.py file with details mentioned below:
     ```python
@@ -32,20 +32,26 @@ Three major parts are in this project.
     ```
 1. run `Streamer` with an array of filter words that you want to fetch tweets on. eg. `$python twitter_streaming.py hello hi hallo namaste > data_file.txt` this will save a line by line words from tweets filtered according to words used as args in `data_file.txt`.
 
+## Using WordNet Module
+
+1. install wordnet module using this script, 
+
+        $python setup.py install
+
 1. To create a `TF-IDF` structure file for every doc, use:
 
     ```python
     from wordnet import find_tf_idf
 
     idf, tf_idf = find_tf_idf(
-    file_names=['file/path1','file/path2',..],       # paths of files to be processed.
+    file_names=['file/path1','file/path2',..],       # paths of files to be processed.(create using twitter_streamer.py)
     prev_file_path='prev/tf/idf/file/path.tfidfpkl', # prev TF_IDF file to modify over, format standard is .tfidfpkl. default = None
     dump_path='path/to/dump/file.tfidfpkl'           # dump_path if tf-idf needs to be dumped, format standard is .tfidfpkl. default = None
     )
 
     '''
-    if no file is provided prev_file_path parameter, new TF-IDF file will be generated ,and else T
-    F-IDF values will be combined with previous file, and dumped at dump_path if mentioned,
+    if no file is provided prev_file_path parameter, new TF-IDF file will be generated ,and else
+    TF-IDF values will be combined with previous file, and dumped at dump_path if mentioned,
     else will only return the new tf-idf list of dictionaries.
     '''
     ```
@@ -62,7 +68,8 @@ Three major parts are in this project.
     )
 
     '''
-    This function will return a list of words closely related to provided input_word refering to tf_idf var provided to it. either use find_tf_idf() to gather this var or pickle.load() a dump
+    This function will return a list of words closely related to provided input_word refering to
+    tf_idf var provided to it. either use find_tf_idf() to gather this var or pickle.load() a dump
     file dumped by the same function at your choosen directory. the file contains 2 lists in format
     (idf, tf_idf).
     '''

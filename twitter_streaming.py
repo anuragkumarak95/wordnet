@@ -2,8 +2,6 @@ from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
 import json
-import http.client
-import urllib3
 import sys
 from  wordnet.bin import paint
 import config as cf

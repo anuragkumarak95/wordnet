@@ -18,9 +18,6 @@ out_dict = {
 ,'OUT_TRUE_4' : ['punjab', 'Whther', 'evergreen', 'haryana', 'victam', 'Sikhs', 'delhi', 'rocks', 'godmen']
 ,'OUT_TRUE_5' : ['neggie', 'lanny', 'quicky', 'jetpackers', 'shepherd', 'kline', 'schoolgirl', 'barbie', 'entirely', 'crussades']
 }
-
-
-
 def __init__():
     # generating tf-idf from test/testdata file(default tf-idf file)
     global idf
@@ -33,7 +30,6 @@ def __init__():
     del temp2
     os.remove('test/dump.tfidfpkl')
     
-
 def test_nnwords(word):
     out = []
     for w in find_knn(tf_idf,word,rand_on=False):
@@ -66,10 +62,6 @@ class TestWordNet(unittest.TestCase):
                 sorted(out_dict['OUT_TRUE_'+str(i)])
             )
     
-    # this function is  not working stable, 
-    # it produces new list of words ,every time.
-    # have a look at word_net.py, why is this happening.
-    # and change dumpt_path=None after solution.
     def test_wordnet_module(self):
         # testing error raise code.
         wrng_name = 'test/test.wrng'
@@ -97,9 +89,10 @@ class TestWordNet(unittest.TestCase):
         self.assertEquals(len(a_n),len(r_n))
 
         # covering dump section of generate_net()
-        generate_net(idf,tf_idf,wrnt_name)
+        generate_net(idf,tf_idf,'test/dump.wrnt')
         
         # cleaning as we move on!
+        os.remove('test/dump.wrnt')
         del a_n
         del r_n
         del n
