@@ -51,7 +51,6 @@ def find_tf_idf(file_names=['./../test/testdata'],prev_file_path=None, dump_path
     '''
     tf_idf = [] # will hold a dict of word_count for every doc(line in a doc in this case)
     df = {}
-
     # this statement is useful for altering existant tf-idf file and adding new docs in itself.(## memory is now the biggest issue)
     if prev_file_path:
         print(TAG,'modifying over exising file.. @',prev_file_path)
@@ -66,10 +65,13 @@ def find_tf_idf(file_names=['./../test/testdata'],prev_file_path=None, dump_path
         #create word_count dict for all docs
         for line in file1:
             dict = {}
-            #find the amount of doc a word is ine
+           #find the amount of doc a word is in
+            for i in set(line.split()):
+                if i in df: df[i] +=1
+                else: df[i] =1
+                
+            #find the count of all words in every doc
             for word in line.split():
-                df[word] =1
-                #find the count of all words in every doc
                 if word not in dict:
                     dict[word] = 1
                 else:
