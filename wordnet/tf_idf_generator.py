@@ -66,11 +66,9 @@ def find_tf_idf(file_names=['./../test/testdata'],prev_file_path=None, dump_path
         #create word_count dict for all docs
         for line in file1:
             dict = {}
-            #find the amount of doc a word is in
-            for i in set(line.split()):
-                if i in df: df[i] +=1
-                else: df[i] =1
+            #find the amount of doc a word is ine
             for word in line.split():
+                df[word] =1
                 #find the count of all words in every doc
                 if word not in dict:
                     dict[word] = 1

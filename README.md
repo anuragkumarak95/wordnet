@@ -89,7 +89,7 @@ Major parts of this project.
     '''
     ```
 
-1. To retrive a Word `Network`, use :
+1. To retrieve a Word `Network`, use :
 
     ```python
     from wordnet import retrieve_net
