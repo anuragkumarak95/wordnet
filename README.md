@@ -85,7 +85,7 @@ Major parts of this project.
     )
 
     '''
-    this function returns a list of Word entities.
+    this function returns a dict of Word entities, with word as key.
     '''
     ```
 
@@ -98,7 +98,23 @@ Major parts of this project.
         'path/to/network.wrnt' # path to network file, format standard is .wrnt.
         )
     '''
-    this function returns a list of Word entities.
+    this function returns a dictionary of Word entities, with word as key.
+    '''
+    ```
+
+1. To retrieve list of words that are at some depth form a root word in the network, use:
+
+    ```python
+    from wordnet import return_net
+
+    words = return_net(
+        word,       # root word in this process.
+        word_net,   # word network generated from generate_net()
+        depth=1    # depth to which you wish this word collector to traverse.
+    )
+    '''
+    This function returns a list of words that are at provided depth from root word in the
+    network provided.
     '''
     ```
 

@@ -5,7 +5,7 @@ Module made for the soul purpose of build testing and validation.
 This module will test only the functionalities of tf_idf_generator.py and nn_words.py. twitter_streaming.py can't be tested without confidential credetials(config.py file, have a look @ /README.md for further queries).
 '''
 import wordnet.bin.paint
-from wordnet import * 
+from wordnet import *
 import unittest, os, pickle
 
 TAG=paint('TEST/','b')
@@ -67,7 +67,7 @@ class TestWordNet(unittest.TestCase):
         wrng_name = 'test/test.wrng'
         self.assertRaises(Exception, generate_net, (df,tf_idf,wrng_name))
         self.assertRaises(Exception, retrieve_net, (wrng_name))
-
+        
         #test file
         wrnt_name = 'test/test.wrnt'
         # WordNet Reatrieve Net module walkthrough
@@ -79,6 +79,13 @@ class TestWordNet(unittest.TestCase):
         for word in word_net_gen:
             self.assertEquals(word_net_gen[word].w, word_net_ret[word].w)
             self.assertEquals(word_net_gen[word].frwrd_links, word_net_ret[word].frwrd_links)
+        
+        # test for return_net() func
+        self.assertRaises(Exception, return_net  , ('rahim',word_net_gen,0))
+        return_file = open('test/return_net_sample','rb')
+        return_net_sample = pickle.load(return_file)
+        return_file.close()
+        self.assertEquals(sorted(return_net_sample),sorted(return_net('rahim',word_net_gen,depth=2)))
         
         # covering dump section of generate_net()
         generate_net(df,tf_idf,'test/dump.wrnt')
