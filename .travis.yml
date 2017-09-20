@@ -27,4 +27,4 @@ script:
   - if [[ $TRAVIS_PYTHON_VERSION != 3.6 ]]; then python $TARGET; fi
 
 after_success:
-  - if [[ $TRAVIS_PYTHON_VERSION == 3.6 ]]; codecov;
+  - if [[ $TRAVIS_PYTHON_VERSION == 3.6 ]]; then codecov; fi
