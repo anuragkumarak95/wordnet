@@ -25,12 +25,6 @@ import os, math, pickle
 from colorama import Fore, Style
 import pickle
 from .bin import paint  #custom module for coloring different strings.
-'''TO-DO
-1. find a better way to dump tf-idf values, too much data being used for now using list of dict
-2. try to find more efficient ways to compute and calculate TF-IDF values , loop reduction required.
-3. (DONE)change this code to pick a path and create TF-IDF dump from content of all of those files, where every line behaves like a independent document.
-4. introduce a progress rate or better yet progress bar to the output.
-'''
 
 TAG = paint('TF-IDF-GENE/','b')
 def find_tf_idf(file_names=['./../test/testdata'],prev_file_path=None, dump_path=None):
