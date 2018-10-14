@@ -22,9 +22,8 @@ sample file format of input:
 here, every line represents a document.
 '''
 import os, math, pickle
-from colorama import Fore, Style
-import pickle
 from .bin import paint  #custom module for coloring different strings.
+from collections import defaultdict
 '''TO-DO
 1. find a better way to dump tf-idf values, too much data being used for now using list of dict
 2. try to find more efficient ways to compute and calculate TF-IDF values , loop reduction required.
@@ -50,7 +49,7 @@ def find_tf_idf(file_names=['./../test/testdata'],prev_file_path=None, dump_path
     tf_idf : the generated tf-idf list of dictionaries for mentioned docs.
     '''
     tf_idf = [] # will hold a dict of word_count for every doc(line in a doc in this case)
-    df = {}
+    df = defaultdict(int)
     # this statement is useful for altering existant tf-idf file and adding new docs in itself.(## memory is now the biggest issue)
     if prev_file_path:
         print(TAG,'modifying over exising file.. @',prev_file_path)
@@ -59,27 +58,20 @@ def find_tf_idf(file_names=['./../test/testdata'],prev_file_path=None, dump_path
         prev_corpus_length = len(tf_idf)
 
     for f in file_names:
+        # never use 'rb' for textual data, it creates something like,  {b'line-inside-the-doc'}
+        with open(f,'r') as file1:
+            #create word_count dict for all docs
+            for line in file1:
+                wdict = defaultdict(int)
+                #find the amount of doc a word is in
+                for word in set(line.split()):
+                    df[word] +=1
+                #find the count of all words in every doc
+                for word in line.split():
+                    wdict[word] += 1
+                tf_idf.append(wdict)
 
-        file1 = open(f,'r') # never use 'rb' for textual data, it creates something like,  {b'line-inside-the-doc'}
-        
-        #create word_count dict for all docs
-        for line in file1:
-            dict = {}
-           #find the amount of doc a word is in
-            for i in set(line.split()):
-                if i in df: df[i] +=1
-                else: df[i] =1
-                
-            #find the count of all words in every doc
-            for word in line.split():
-                if word not in dict:
-                    dict[word] = 1
-                else:
-                    dict[word] += 1
-            tf_idf.append(dict)
-        file1.close()
-
-    #calculating final TF-IDF values  for all words in all docs(line in a doc in this case)
+    #calculating final TF-IDF values  for all words in all docs(line is a doc in this case)
     for doc in tf_idf:
         for key in doc:
             true_idf = math.log(len(tf_idf)/df[key])

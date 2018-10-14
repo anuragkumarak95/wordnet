@@ -2,15 +2,14 @@
 
 Module for creating a network of word entities(look @ models/word.py for entity details)
 '''
-from .models import Word
 import pickle, sys, time
-from .bin import paint
 from datetime import datetime
+from .models import Word
+from .bin import paint
 # local vars
 TAG = paint('WORDNET/','b')
 __WRNT_FORMAT =  'wrnt'
 __WRNG_FORMAT_MSG = TAG+'\'.wrnt\' file format is needed'
-
 
 def generate_net(df,tf_idf,dump_path=None):
     '''Generate WordNetwork dict of Word() instance, and dump as a file if asked to.
@@ -33,18 +32,20 @@ def generate_net(df,tf_idf,dump_path=None):
     word_net = {} # list of word entities.
     
     #registering all word instances in a dict of network
-    for k in df:
-        word_net[k] = Word(k)
+    for word in df.keys():
+        word_net[word] = Word(word)
     print(TAG,'word-network instances created..',datetime.now()-start_t)
+    start_t = datetime.now()
 
     #TODO: code for going through all the tf_idf elements and finding backward links and forward links of every word in word_net.
     for docs in tf_idf:
-        for word in docs:
-            word_net[word].addtofrwrd_links(set(docs))
+        for word in docs.keys():
+            word_net[word].addtofrwrd_links(set(docs.keys()))
     print(TAG, 'word filled with their relative words(network generated)... ',datetime.now()-start_t)
     
     # Dump the generated lists if dump_path is given.
     if dump_path:
+        start_t = datetime.now()
         __words = {}
         __network = []
         i=0
@@ -59,6 +60,7 @@ def generate_net(df,tf_idf,dump_path=None):
             __network.append(__temp_list)
             del __temp_list
         print(TAG, 'created final relative-words list.. return ready.',datetime.now()-start_t)
+        start_t = datetime.now()
         # Dumping data using pickle
         dump_file = open(dump_path,'wb')
         pickle.dump(__network,dump_file,protocol=pickle.HIGHEST_PROTOCOL)
